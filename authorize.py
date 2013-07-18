@@ -1,5 +1,6 @@
 #!/usr/bin/env python2
 import flickr_api
+import os
 
 flickr_api.set_keys(api_key = '9dc2e46ce1e917d3f2ef09b087b80fc5', api_secret = '56349739605a5e37')
 
@@ -14,7 +15,9 @@ while accepted.lower() == 'n':
   oauth_verifier = raw_input('What is the PIN? ')
 
 #set the oauth_verifier token
+dir = os.path.dirname(__file__)
+
 a.set_verifier(oauth_verifier)
-a.save('auth', include_api_keys=True)
+a.save(os.path.join(dir, 'auth'), include_api_keys=True)
 
 print a.access_token # debug

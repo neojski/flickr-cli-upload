@@ -3,7 +3,8 @@ import flickr_api
 import os
 import sys
 
-flickr_api.set_auth_handler('auth')
+dir = os.path.dirname(__file__)
+flickr_api.set_auth_handler(os.path.join(dir, 'auth'))
 
 def upload(name):
   if not os.path.exists(name):
@@ -13,7 +14,7 @@ def upload(name):
   print 'starting upload of %s\n' % name
   
   path = os.path.abspath(name)
-  tags = os.path.dirname(path).replace(' ', '_').replace('/', ' ').strip()
+  tags = ', '.join(os.path.dirname(path).replace(',', '_').strip('/').split('/'))
   
   print 'included tags: %s\n' % tags
   
