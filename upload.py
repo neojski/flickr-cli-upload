@@ -13,14 +13,13 @@ def upload(name):
   if not os.path.exists(name):
     perror('file %s doesn\'t exist\n' % name)
     sys.exit(2)
-  
+
   path = os.path.abspath(name)
   tags = ', '.join(os.path.dirname(path).replace(',', '_').strip('/').split('/'))
-  
-  perror('included tags: %s\n' % tags)
-  
+
   try:
     flickr_api.upload(photo_file = path, tags = tags, is_public = 0, is_friend = 0, is_family = 0)
+    perror('included tags: %s\n' % tags)
   except:
     sys.exit(3)
 
